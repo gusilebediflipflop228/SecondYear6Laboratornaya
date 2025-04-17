@@ -354,8 +354,52 @@ public class CollectionsDemoTest {
 
 
 
+    @Test
+    public void testGroupHumansByAge() {
+        Set<Human> humans = new HashSet<>();
+        humans.add(new Human("John", "Doe", "Smith", 30));
+        humans.add(new Human("Jane", "Doe", "Smith", 25));
+        humans.add(new Human("Bob", "Smith", "Williams", 25));
+        humans.add(new Human("Charlie", "Brown", "Adams", 18));
+
+        Map<Integer, List<Human>> expected = new HashMap<>();
+        expected.put(30, Arrays.asList(new Human("John", "Doe", "Smith", 30)));
+        expected.put(25, Arrays.asList(new Human("Jane", "Doe", "Smith", 25), new Human("Bob", "Smith", "Williams", 25)));
+        expected.put(18, Collections.singletonList(new Human("Charlie", "Brown", "Adams", 18)));
+
+        Map<Integer, List<Human>> result = CollectionsDemo.groupHumansByAge(humans);
+
+        assertEquals(expected, result);
+    }
 
 
+    @Test
+    public void testGroupHumansByAgeWithEmptySet() {
+        Set<Human> humans = new HashSet<>();
+
+        Map<Integer, List<Human>> expected = new HashMap<>();
+
+        Map<Integer, List<Human>> result = CollectionsDemo.groupHumansByAge(humans);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGroupHumansByAgeWithUniqueAges() {
+        Set<Human> humans = new HashSet<>();
+        humans.add(new Human("John", "Doe", "Smith", 20));
+        humans.add(new Human("Jane", "Doe", "Smith", 25));
+        humans.add(new Human("Alice", "Johnson", "Brown", 30));
+
+        Map<Integer, List<Human>> expected = new HashMap<>();
+        expected.put(20, Collections.singletonList(new Human("John", "Doe", "Smith", 20)));
+        expected.put(25, Collections.singletonList(new Human("Jane", "Doe", "Smith", 25)));
+        expected.put(30, Collections.singletonList(new Human("Alice", "Johnson", "Brown", 30)));
+
+        Map<Integer, List<Human>> result = CollectionsDemo.groupHumansByAge(humans);
+
+        assertEquals(expected, result);
+    }
 
 
 }
