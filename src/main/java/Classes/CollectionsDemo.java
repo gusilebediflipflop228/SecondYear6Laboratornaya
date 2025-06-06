@@ -107,15 +107,16 @@ public class CollectionsDemo {
         return result;
     }
 
-    public static Map<Integer, List<Human>> groupHumansByAge(Set<Human> humans) {
+    public static Map<Integer, List<Human>> groupHumansByAge(Set<Human> humans) { // 10
         Map<Integer, List<Human>> result = new HashMap<>();
 
         for (Human human : humans) {
             result.putIfAbsent(human.getAge(), new ArrayList<>());
             result.get(human.getAge()).add(human);
         }
-
         return result;
     }
+
+
 
 }
